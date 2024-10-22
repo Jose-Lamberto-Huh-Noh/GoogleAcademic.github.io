@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guía de Investigación Asistida por IA para Google Académico.">
+    <title>Guía de Investigación Asistida por IA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .formulario {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        .resultados {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #4CAF50;
+            background-color: #e8f5e9;
+        }
+        .mapa-conceptual {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .mapa-conceptual div {
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #000;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Guía de Investigación Asistida por IA</h1>
+</header>
+
+<section class="formulario">
+    <h2>Asistencia para tu Investigación</h2>
+    <p>Introduce tu tema de investigación y selecciona una opción para recibir sugerencias:</p>
+
+    <form id="researchForm">
+        <label for="tema">Tema de investigación:</label><br>
+        <input type="text" id="tema" name="tema" placeholder="Ej. Inteligencia Artificial aplicada a la Educación" style="width: 100%; padding: 10px;"><br><br>
+
+        <label for="opciones">¿Qué te gustaría recibir?</label><br>
+        <select id="opciones" name="opciones" style="width: 100%; padding: 10px;">
+            <option value="preguntas">Sugerencias de preguntas de investigación</option>
+            <option value="literatura">Análisis de la literatura existente</option>
+            <option value="mapa">Crear mapa conceptual</option>
+        </select><br><br>
+
+        <button type="button" onclick="procesar()">Generar</button>
+    </form>
+
+    <div id="resultados" class="resultados" style="display: none;">
+        <h3>Resultados:</h3>
+        <p id="contenido"></p>
+    </div>
+</section>
+
+<section id="mapa" class="mapa-conceptual" style="display: none;">
+    <h2>Mapa Conceptual</h2>
+    <div id="nodo1">Tema Central</div>
+    <div id="nodo2">Área de Aplicación</div>
+    <div id="nodo3">Metodología</div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Guía de Investigación Asistida por IA</p>
+</footer>
+
+<script>
+    // Función para procesar el formulario según la opción seleccionada
+    function procesar() {
+        let tema = document.getElementById('tema').value;
+        let opcion = document.getElementById('opciones').value;
+        let contenido = '';
+
+        if (tema === '') {
+            alert("Por favor, introduce un tema de investigación.");
+            return;
+        }
+
+        if (opcion === 'preguntas') {
+            contenido = `<strong>Sugerencias de Preguntas:</strong><br>
+                        1. ¿Cómo impacta ${tema} en la formación de los estudiantes?<br>
+                        2. ¿Qué desafíos enfrenta ${tema} en su implementación?<br>
+                        3. ¿Qué oportunidades ofrece ${tema} para la mejora del aprendizaje?`;
+        } else if (opcion === 'literatura') {
+            contenido = `<strong>Análisis de la Literatura:</strong><br>
+                        Se ha identificado que la investigación sobre <strong>${tema}</strong> está en auge. Algunos estudios clave incluyen:<br>
+                        1. Un análisis sobre cómo se aplica ${tema} en diferentes contextos educativos.<br>
+                        2. Una revisión sistemática que analiza las brechas en la investigación sobre ${tema}.`;
+        } else if (opcion === 'mapa') {
+            document.getElementById('mapa').style.display = 'block';
+            document.getElementById('nodo1').textContent = tema;
+            document.getElementById('nodo2').textContent = `Aplicación de ${tema}`;
+            document.getElementById('nodo3').textContent = `Metodología sugerida para ${tema}`;
+            contenido = 'Mapa conceptual generado a partir del tema introducido.';
+        }
+
+        // Mostrar resultados
+        document.getElementById('resultados').style.display = 'block';
+        document.getElementById('contenido').innerHTML = contenido;
+    }
+</script>
+
+</body>
+</html>
